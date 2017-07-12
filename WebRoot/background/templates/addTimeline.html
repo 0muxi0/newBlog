@@ -1,0 +1,36 @@
+
+<section class="content-header">
+	<h1>
+		发表说说
+		<!-- <small>Optional description</small> -->
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> 说说管理</a></li>
+		<li class="active">新建说说</li>
+	</ol>
+</section>
+<section class="content" id="contentPage" v-loading="loading"
+	element-loading-text="拼命加载中">
+	<div class="box-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-primary">
+					<div role="form">
+						<div class="box-body">
+							<div class="form-group">
+								<label>记录时光</label>
+                  				<textarea class="form-control" rows="6" placeholder="想说出点什么 ..."></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="padding:0px  25px;">
+		<button type="button" class="btn btn-block btn-info btn-lg"
+			id="add_timeline">提交</button>
+	</div>
+</section>
+
+

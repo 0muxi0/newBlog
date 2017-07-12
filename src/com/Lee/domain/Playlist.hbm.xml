@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+    
+    <hibernate-mapping>
+    			<class name="com.Lee.domain.Playlist"  table="playlist">
+    				<id name="pid" column="pid">
+    						<generator class="native"/>
+    				</id>
+    				<property name="pname" column="pname"  length="50"></property>
+    				<property name="pdesc"  column="pdesc"  length="100"></property>
+    				<property name="plable" column="plable"  length="20"></property>
+    				<property name="createtime"  column="createtime"  length="100"></property>
+    				<property name="pImg"  column="pImg"  length="100"></property>
+    				
+    				<!-- 关联关系映射 -->
+    				<set name="musics"  cascade="delete"  inverse="true"  lazy="false" >
+     							<key column="pnumb"></key>
+     							<one-to-many class="com.Lee.domain.Music" />
+     				</set>
+    			</class>
+    </hibernate-mapping>

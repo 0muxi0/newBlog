@@ -1,0 +1,245 @@
+
+<section class="content-header" id=""></section>
+
+<section class="col-md-12 content  " id="home"></section>
+<div id="article"></div>
+
+
+<section class="col-md-12 content padding" id="services">
+	<style>
+#wish {
+	height: 650px;
+	margin: 20px;
+	position: relative;
+	/* 	width: 960px; */
+}
+
+.wish {
+	background: url(images/wish_bg.png) no-repeat 0 0;
+	color: #000;
+	height: 166px;
+	padding: 10px 20px 30px 20px;
+	width: 185px;
+}
+
+.wish-close {
+	background: url(images/wish_close_bg.png) no-repeat 0 0;
+	display: none;
+	position: absolute;
+	right: 5px;
+	top: -5px;
+	width: 17px;
+	height: 17px;
+}
+
+.form-control {
+	background-color: #FFF186;
+}
+</style>
+
+
+	<div class="col-lg-12 col-md-12  content-item  flexbox"
+		style="margin-bottom:20px">
+		<ul id="wish" class="col-lg-12 col-md-12">
+			<!-- <li class="">
+				<span style="display:block ;margin:10px 20px"  id="mname">11111fdfa</span>
+				<span id="mcontent">11111fdfa fasfasdas fsafasf asfasfasf</span>
+			</li>
+			<li>22222fasfasfas fasfasf asfsa</li>
+			<li>33333</li>
+			<li>44444</li>
+			<li>55555</li> -->
+		</ul>
+	</div>
+</section>
+
+<section class="col-md-12 content  ">
+	<div style="margin:0 auto;padding-bottom: 10px;text-align:center">
+		<span style="font-size:14px;">
+			<ul class="pagination" id="pageUl"></ul>
+		</span>
+	</div>
+</section>
+
+
+<section>
+	<div style="overflow:unset" class="contact-form">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="form-group">
+				<input name="name" type="text" class="form-control" id="name"
+					placeholder="姓名" required>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-l-3">
+			<div class="form-group contact-field">
+				<input name="email" type="email" class="form-control" id="email"
+					placeholder="邮箱" required>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group contact-field">
+				<input name="subject" type="text" class="form-control" id="subject"
+					placeholder="联系方式" required>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group contact-field">
+				<textarea name="message" rows="5" class="form-control" id="message"
+					placeholder="想说什么呢。。。" required></textarea>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group margin-b-0" style="text-align: center;">
+				<button id="form-submit" class="btn no-bg btn-contact"
+					style="background-color: #B5C6CD;" onclick="msgAdd()">提交</button>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+
+
+
+<section>
+
+	<script type="text/templates" id="msg-t">
+		<% for(var i in list){ %>
+			<li>
+				<span style="display:block ;margin:10px 20px;color:blue;text-align: center;"  id="mname"><%=list[i].name%></span>
+				<span id="mcontent"><%=list[i].content%></span>
+			</li>
+		<% } %>
+	</script>
+
+	<script>
+	
+		var page = 1;
+		//请求留言并渲染
+		function getData(callback) {
+			//			console.log(aid);
+			$.ajax({
+				type : "post",
+				dataType : "json",
+				url : "msg_findAll",
+				ansyc : false,
+				data : {
+					"currPage" : page,
+				},
+				success : function(res) {
+					$("#wish").html(_.template($("#msg-t").html())({
+						list : res.list.list,
+					}));
+	
+					var pages = res.list.totalPage; //数据总量
+					var currPage = res.list.currPage; //当前页
+					if (pages !== 0) {
+						var element = $('#pageUl'); //对应下面ul的ID
+						var options = {
+							bootstrapMajorVersion : 3,
+							currentPage : currPage, //当前页面
+							numberOfPages : 20, //一页显示10个按钮（在ul里面生成10个li）
+							totalPages : pages //总页数
+						}
+						element.bootstrapPaginator(options);
+					}
+					callback();
+				},
+			});
+	
+			/*	$('#wish').wish();
+			    $('.wish').draggable({containment:'#wish',scroll:false});*/
+	
+		}
+	
+	
+	
+	
+		getData(function() {
+			$('#wish').wish();
+			$('.wish').draggable({
+				containment : '#wish',
+				scroll : false
+			});
+	
+		})
+	
+	
+	
+	
+	
+		//获取当前页
+		function paging(pageNow) {
+			page = pageNow;
+			getData(function() {
+				$('#wish').wish();
+				$('.wish').draggable({
+					containment : '#wish',
+					scroll : false
+				});
+	
+			});
+		}
+	
+	
+	
+	
+	
+		//添加留言
+		function msgAdd() {
+			var mydate = new Date();
+			var t = mydate.toLocaleString();
+			$.ajax({
+				type : "post",
+				dataType : "json",
+				url : "msg_add",
+				data : {
+					"name" : $("#name").val(),
+					"content" : $("#message").val(),
+					"uptime" : t,
+				},
+				success : function(res) {
+					if (res.ret == 0) {
+						layer.msg("添加成功！");
+						$("#name").val('');
+						$("#message").val('');
+						$("#email").val('');
+						$("#subject").val('');
+						getData(function() {
+							$('#wish').wish();
+							$('.wish').draggable({
+								containment : '#wish',
+								scroll : false
+							});
+						})
+					}
+					else {
+						layer.msg("添加失败！");
+					}
+				}
+			})
+	
+		}
+	</script>
+
+
+</section>
+
+
+<!-- <section  id="services">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  background"  style="margin-top:30px">
+		<div  style="font-size: x-large; margin-bottom: 30px;">评论区</div>
+		<div class="descuss">
+			<div style="margin-left: 60px;">
+					<div>
+								<span style="font-size: 18px;color: #AD8D68;">网友名字</span>
+					</div>
+								<p style="margin-top: 10px;">
+											&nbsp;&nbsp;&nbsp;&nbsp;评价内容评价内容</p>
+					<div>
+								<span>2016-9-26</span>&nbsp;&nbsp; <a>回复</a>
+					</div>
+			</div>
+		</div>
+	</div>
+</section> -->

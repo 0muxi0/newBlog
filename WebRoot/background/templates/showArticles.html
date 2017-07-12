@@ -1,0 +1,153 @@
+
+<section class="content-header">
+	<h1>
+		所有文章
+		<!-- <small>Optional description</small> -->
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> 博文管理</a></li>
+		<li class="active">管理文章</li>
+	</ol>
+</section>
+
+<section class="content" id="contentPage" v-loading="loading"
+	element-loading-text="拼命加载中">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!-- <div class="box-header">
+					<h3 class="box-title">文章集合</h3>
+				</div> -->
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="example1" class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>文章标题</th>
+								<th>类型</th>
+								<th>作者</th>
+								<th>地点</th>
+								<th>时间</th>
+								<th>备注</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="article">
+							<tr>
+								<td>测试标题1</td>
+								<td>测试类型1</td>
+								<td>测试作者1</td>
+								<td>测试地点1</td>
+								<td>2017-04-13</td>
+								<td>备注</td>
+								<td >编辑</td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- //分页-->
+					<div style="margin:0 auto;padding-bottom: 10px;text-align:center">
+						<span style="font-size:14px;">
+							<ul class="pagination"  id="pageUl"></ul>
+						</span>
+					</div>
+					<div class="c"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+	<script type="text/templates"  id="article-t">
+		<% for(var i in list){ %>
+				<tr>
+								<td><%=list[i].title%></td>
+								<td><%=list[i].type%></td>
+								<td><%=list[i].author%></td>
+								<td><%=list[i].address%></td>
+								<td><%=list[i].uptime%></td>
+								<td><%=list[i].remark%></td>
+								<td><a href="javascript:void(0);" class="edit"  data-id=<%=list[i].aid%>  >编辑</a>&nbsp;&nbsp;&nbsp<a href="javascript:void(0);" style="color:red;" class="del" data-id=<%=list[i].aid%>>删除</a></td>
+				</tr>
+		<% } %>
+	</script>
+
+
+
+
+
+<section>
+
+	<script type="text/javascript">
+	var page=1;
+	function findAll() {
+			$.ajax({
+				type : "post",
+			 	url : "article_findAll", 
+				data:{
+					"currPage":page,	
+				},
+				success : function(res) {
+					$("#article").html(_.template($("#article-t").html())({
+						list:res.list.list,
+					}));
+					var pages = res.list.totalPage;//数据总量
+					var currPage=res.list.currPage;//当前页
+                    if (pages !== 0) {
+                        var element = $('#pageUl');//对应下面ul的ID
+                        var options = {
+                            bootstrapMajorVersion: 3, 
+                            currentPage: currPage,//当前页面
+                            numberOfPages: 5,//一页显示10个按钮（在ul里面生成10个li）
+                            totalPages: pages //总页数
+                        }
+                        element.bootstrapPaginator(options);
+                    }
+				},
+			});
+		}
+		
+		 //获取当前页
+    	function paging(pageNow) {
+		        page = pageNow;
+		        findAll();
+    	}
+    	//自执行查询所有文章
+    	$(function(){
+    		 findAll();
+    	})
+    	
+    	//页面跳转及传输文章id
+    	$("#article").on("click",".edit",function(){
+    		var aid =$(this).attr('data-id');
+    		window.location.href="index.html#editArticle/"+aid;
+    	});
+    	
+    	
+    	$("#article").on("click",".del",function(){
+    		var aid =$(this).attr('data-id');
+    		console.log(aid);
+    		$.ajax({
+				type:"post",
+				dataType:"json",
+				url:"article_delete",
+				data:{
+					aid:aid,
+				},
+				success:function(res){
+					if(res.returnCode==0){
+						layer.msg("文章删除成功！")
+						 findAll();
+					}else{
+						layer.msg("文章删除失败！")
+					}
+				}
+			})
+    	});
+    	
+    	
+    	
+	</script>
+
+
+</section>
+

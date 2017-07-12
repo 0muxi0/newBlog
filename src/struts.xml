@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<package name="newBlog"  extends="struts-default,json-default"   namespace="/background">
+			 <action name="article_*"  class="articleAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action> 
+			<action name="timeline_*"  class="timelineAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action>
+			<action name="msg_*"  class="msgAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action>  
+			<action name="artDisc_*"  class="artDiscAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action>
+			<action name="playlist_*"  class="playlistAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action>    
+			<action name="music_*"  class="musicAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action>   
+			
+			
+	</package>
+
+	<package name="newBlog/"  extends="struts-default,json-default"   namespace="/">
+			 <action name="article_*"  class="articleAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action> 
+			<action name="timeline_*"  class="timelineAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action>
+			<action name="msg_*"  class="msgAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action>  
+			<action name="artDisc_*"  class="artDiscAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action>
+			<action name="playlist_*"  class="playlistAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action>    
+			<action name="music_*"  class="musicAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action> 
+			<action name="login_*"  class="loginAction"  method="{1}">
+				<!-- <result name="success" type="json">  
+                        <param name="root">dataMap</param>  
+                </result>  -->
+			</action>    
+			
+	</package>
+	
+	<constant name="struts.action.excludePattern" value="/background/jsp/.*" />
+	
+	
+</struts>

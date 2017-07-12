@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+		<!-- 引入外部属性文件 -->
+		<context:property-placeholder location="classpath:jdbc.properties"/>
+		<!-- 配置连接池 -->
+		<bean id="dataSource"  class="com.mchange.v2.c3p0.ComboPooledDataSource">
+			<property name="driverClass"  value="${jdbc.driverClass}"></property>
+			<property name="jdbcUrl"  value="${jdbc.url}"></property>
+			<property name="user"  value="${jdbc.username}"></property>
+			<property name="password"  value="${jdbc.password}"></property>
+		</bean>
+		
+		<!-- 配置Hibernate相关属性 -->
+		<bean id="sessionFactory"  class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+			<!-- 注入连接池 -->
+			<property name="dataSource"  ref="dataSource"></property>
+			<!-- 配置Hibernate属性 -->
+			<property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.formate_sql">true</prop>
+					<prop key="hibernate.hbm2ddl.auto">update</prop>
+				</props>
+			</property>
+			<!-- 加载Hibernate中的映射文件 -->
+			<property name="mappingResources">
+					<list>
+							<value>com/Lee/domain/Article.hbm.xml</value>
+							<value>com/Lee/domain/ArticleDisc.hbm.xml</value>
+							<value>com/Lee/domain/Message.hbm.xml</value>
+							<value>com/Lee/domain/Music.hbm.xml</value>
+							<value>com/Lee/domain/Playlist.hbm.xml</value>
+							<value>com/Lee/domain/Timeline.hbm.xml</value>
+							<value>com/Lee/domain/User.hbm.xml</value>
+					</list>
+			</property>
+		</bean>
+		
+		<!-- 配置Action的类 -->
+		<bean id="articleAction"  class="com.Lee.action.ArticleAction"  scope="prototype"  >
+				<property name="articleService"  ref="articleService"></property>
+		</bean>
+		<bean id="timelineAction"  class="com.Lee.action.TimelineAction"  scope="prototype"  >
+				<property name="timelineService"  ref="timelineService"></property>
+		</bean>
+		<bean id="msgAction"  class="com.Lee.action.MsgAction"  scope="prototype"  >
+				<property name="msgService"  ref="msgService"></property>
+		</bean>
+		<bean id="artDiscAction"  class="com.Lee.action.ArtDiscAction"  scope="prototype"  >
+				<property name="artDiscService"  ref="artDiscService"></property>
+				<property name="articleService" ref="articleService"></property>
+		</bean>
+		<bean id="playlistAction"  class="com.Lee.action.PlaylistAction"  scope="prototype"  >
+				<property name="playlistService"  ref="playlistService"></property>
+		</bean>
+		<bean id="musicAction"  class="com.Lee.action.MusicAction"  scope="prototype"  >
+				<property name="musicService"  ref="musicService"></property>
+				<property name="playlistService"  ref="playlistService"></property>
+		</bean>
+		<bean id="loginAction"  class="com.Lee.action.LoginAction"  scope="prototype"  >
+				<property name="loginservice"  ref="loginService"></property>
+		</bean>
+		
+		
+		
+		
+		
+		<!-- 配置业务层的类 -->
+		<bean id="articleService" class="com.Lee.service.impl.ArticleServiceImpl"  >
+				<property name="articleDao"  ref="articleDao"></property>
+		</bean>
+		<bean id="timelineService" class="com.Lee.service.impl.TimelineServiceImpl"  >
+				<property name="timelineDao"  ref="timelineDao"></property>
+		</bean>
+		<bean id="msgService" class="com.Lee.service.impl.MsgServiceImpl"  >
+				<property name="msgDao"  ref="msgDao"></property>
+		</bean>
+		<bean id="artDiscService" class="com.Lee.service.impl.ArtDiscServiceImpl"  >
+				<property name="artDiscDao"  ref="artDiscDao"></property>
+		</bean>
+		<bean id="playlistService" class="com.Lee.service.impl.PlaylistServiceImpl"  >
+				<property name="playlistDao"  ref="playlistDao"></property>
+		</bean>
+		<bean id="musicService" class="com.Lee.service.impl.MusicServiceImpl"  >
+				<property name="musicDao"  ref="musicDao"></property>
+		</bean>
+		<bean id="loginService" class="com.Lee.service.impl.LoginServiceImpl"  >
+				<property name="loginDao"  ref="loginDao"></property>
+		</bean>
+		 
+		
+		
+		
+		<!-- 配置DAO的类 -->
+		<bean id="articleDao"  class="com.Lee.dao.impl.ArticleDaoImpl">
+				<property name="sessionFactory"  ref="sessionFactory"  />
+		</bean>
+		<bean id="timelineDao"  class="com.Lee.dao.impl.TimelineDaoImpl">
+				<property name="sessionFactory"  ref="sessionFactory"  />
+		</bean>
+		<bean id="msgDao"  class="com.Lee.dao.impl.MsgDaoImpl">
+				<property name="sessionFactory"  ref="sessionFactory"  />
+		</bean>
+		<bean id="artDiscDao"  class="com.Lee.dao.impl.ArtDiscDaoImpl">
+				<property name="sessionFactory"  ref="sessionFactory"  />
+		</bean>
+		<bean id="playlistDao"  class="com.Lee.dao.impl.PlaylistDaoImpl">
+				<property name="sessionFactory"  ref="sessionFactory"  />
+		</bean>
+		<bean id="musicDao"  class="com.Lee.dao.impl.MusicDaoImpl">
+				<property name="sessionFactory"  ref="sessionFactory"  />
+		</bean>
+		<bean id="loginDao"  class="com.Lee.dao.impl.LoginDaoImpl">
+				<property name="sessionFactory"  ref="sessionFactory"  />
+		</bean>
+		
+		
+		
+		
+		
+		
+		
+		<!-- 配置事务管理器 -->
+		<bean id ="transactionManager"  class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+				<property name="sessionFactory"  ref="sessionFactory"></property>
+		</bean>
+		
+		<!-- 开启注解事务 -->
+		<tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

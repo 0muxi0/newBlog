@@ -1,0 +1,59 @@
+
+<section class="content-header">
+	<h1>
+		编辑歌单
+		<!-- <small>Optional description</small> -->
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> 歌单管理</a></li>
+		<li class="active">编辑歌单</li>
+	</ol>
+</section>
+<section class="content" id="contentPage" v-loading="loading"
+	element-loading-text="拼命加载中">
+	<div class="box-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-primary">
+					<div role="form">
+						<div class="box-body">
+							<div class="form-group">
+								<label for="exampleInputEmail1">歌单名:</label> <input
+									class="form-control" id="title" placeholder="title" type="text">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">歌单描述:</label> <input
+									class="form-control" id="type" placeholder="木子" type="text">
+							</div>
+							<div class="form-group">
+								<label>创建时间:</label>
+								<div class="input-group date">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input type="text" class="form-control pull-right"
+										id="datepicker">
+								</div>
+							</div>
+							<!-- <div class="form-group">
+								<label></label>
+								<textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</section>
+
+<section>
+	<div style="padding:0px  25px;">
+		<button type="button" class="btn btn-block btn-info btn-lg"
+			id="edit_playlist">修改完成</button>
+		<button type="button" class="btn btn-block btn-info btn-lg"
+			id="delete_playlist">删除歌单</button>
+	</div>
+</section>
+

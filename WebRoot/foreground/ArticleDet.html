@@ -1,0 +1,146 @@
+
+<section class="content-header" id=""></section>
+
+<section class="col-md-12 content  " id="home"></section>
+<div id="article"></div>
+
+
+<section class="col-md-12 content padding" id="services">
+	<div class="col-lg-12 col-md-12  content-item background flexbox"
+		style="margin-bottom:20px">
+		<h2 class="section-title" style="text-align:center" id="title">景色很美，你若在场。。。。</h2>
+		<div style="text-align:center">
+			<p id="time" style="margin: 0 5%;">时间：2017-03-15 12:43:34</p>
+			<p id="author" style="margin: 0 5%;">作者：木子</p>
+		</div>
+		<div id="content">
+			<p class="section-text">Morbi auctor tristique mattis. Vestibulum
+				vitae sapien a ligula mollis ullamcorper ac a nisi. Ut a dignissim
+				est, sodales pellentesque purus. Pellentesque porttitor ante at
+				nulla ornare, eget sagittis sapien pulvinar. In semper mi ut enim
+				mollis, ut auctor lectus posuere.</p>
+
+			<p>Nulla odio nunc, rhoncus quis porttitor quis, convallis sed
+				tortor. Quisque dui mews, euismod vel sapien at, maximus feugiat
+				tellus.</p>
+			<p>Curabitur vel rutrum augue, id tristique diam. Sed imperdiet
+				quis ipsum a vulputate. Suspendisse sit amet nibh mi.</p>
+		</div>
+	</div>
+</section>
+<section>
+	<div style="overflow:unset" class="contact-form">
+		<div class="col-lg-6 col-md-6 col-sm-6  col-xs-12">
+			<div class="form-group">
+				<input name="name" type="text" class="form-control" id="name"
+					placeholder="名字" required>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6  col-xs-12 pad-l-3">
+			<div class="form-group contact-field">
+				<input name="email" type="email" class="form-control" id="email"
+					placeholder=" 联系方式(选填)" required>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group contact-field">
+				<input name="subject" type="text" class="form-control" id="subject"
+					placeholder="备注...（选填）" required>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group contact-field">
+				<textarea name="message" rows="5" class="form-control" id="cont"
+					placeholder="想说什么呢..." required></textarea>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="form-group margin-b-0" style="text-align: center;">
+				<button type="submit" id="form-submit" class="btn no-bg btn-contact"
+					style="background-color: #B5C6CD;">提交</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="services">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  background"
+		style="margin-top:30px">
+		<div style="font-size: x-large; margin-bottom: 30px;">评论区</div>
+		<div class="descuss" id="artDisc">
+			<!-- <div style="margin-left: 60px;">
+					<div>
+								<span style="font-size: 18px;color: #AD8D68;">网友名字</span>
+					</div>
+								<p style="margin-top: 10px;">
+											&nbsp;&nbsp;&nbsp;&nbsp;评价内容评价内容</p>
+					<div>
+								<span>2016-9-26</span>&nbsp;&nbsp; <a>回复</a>
+					</div>
+			</div> -->
+		</div>
+	</div>
+	
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="exampleModalLabel">New message</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="recipient-name" class="control-label">名字:</label>
+							<input type="text" class="form-control" id="recipient-name">
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">不怂，就是刚:</label>
+							<textarea class="form-control" id="message-text"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 13px;">关闭</button>
+					<button type="button" class="btn btn-primary"  data-dismiss="modal"   style="font-size: 13px;"  id="sendM">发送</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</section>
+<section>
+	<script type="text/templates" id="artDisc-t">
+		<% for(var i in list){%>
+			<% if( typeof(list[i].sid)=="undefined") { %>
+				<div style="margin-left: 60px;margin-bottom: 20px; ">
+					<div>
+								<span style="font-size: 18px;color: #AD8D68;" ><%=list[i].oname%></span>
+					</div>
+								<p style="margin-top: 10px;margin-left: 40px;"><%=list[i].content%></p>
+					<div>
+								<span style="margin-left: 20px;"><%=list[i].uptime%></span>&nbsp;&nbsp; 
+								<a   data-toggle="modal" data-target="#exampleModal" data-whatever="<%=list[i].oname%>"  data-id=<%=list[i].adid%>  style="color: blue;">回复 </a>
+					</div>
+				</div>
+			<% }else{ %>
+				<div style="margin-left: 60px;margin-bottom: 20px; ">
+					<div>
+								<span style="font-size: 18px;color: #AD8D68;" ><%=list[i].oname%></span>回复<span style="font-size: 18px;color: #AD8D68;" ><%=list[i].toname%></span>
+					</div>
+								<p style="margin-top: 10px;margin-left: 40px;"><%=list[i].content%></p>
+					<div>
+								<span style="margin-left: 20px;"><%=list[i].uptime%></span>&nbsp;&nbsp; 
+								<a   data-toggle="modal" data-target="#exampleModal" data-whatever="<%=list[i].oname%>"  data-id=<%=list[i].adid%>  style="color: blue;">回复 </a>
+					</div>
+			</div>
+			<% } %>
+		<%}%>
+	</script>
+</section>
+

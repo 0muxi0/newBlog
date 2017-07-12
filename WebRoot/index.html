@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!--    <link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'> -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 许愿墙 -->
+    <link rel="stylesheet" href="css/base.min.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="css/templatemo-style.css">
+    <!-- layUI -->
+	<link rel="stylesheet"  type="text/css"   href="layui/layui.css">
+    <style>
+    .player_box{position: fixed; top: 35%; left:-360px;transition:left 1s;z-index:999}
+    .player_jt{position:absolute;right:-42px;;top:50%;transform:translateY(-50%);}
+    .player_box.active{left:0;}
+    
+    </style>
+
+    <title>木子</title>
+</head>
+
+<body>
+    <div class="fixed-header">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+                <a class="navbar-brand" href="#">Muzi</a>
+            </div>
+            <nav class="main-menu">
+                <ul  style="text-align:center">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="index.html#articleList">在路上</a></li>
+                    <li><a href="timeline.html">时光轴</a></li>
+                    <li><a href="index.html#message" >人来人往</a></li>
+                    <li><a href="index.html#album">光影 </a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="container"  id="main">
+        <section class="col-md-12 content" id="home">
+           <div class="col-lg-6 col-md-6 content-item">
+               <img src="images/1.jpg" alt="Image" class="tm-image">
+           </div>
+           <div class="col-lg-6 col-md-6 content-item content-item-1 background">
+               <h2 class="main-title text-center dark-blue-text" >坎坷人生，淡然在心</h2>
+               <p>每个五月，于我来说都是一段难熬的时光。五月，本就是一个忙碌不堪的月份，而今年的事情尤其的多。工作加多了，腰痛还愈演愈烈。教学不能落下，节目不能不排练，只能拖着病痛坚持工作。</p>
+           </div>
+       </section>
+
+       <section class="col-md-12 content padding" id="services">
+        <div class="col-lg-6 col-md-6 col-md-push-6 content-item">
+           <img src="images/2.jpg" alt="Image" class="tm-image">
+       </div>
+       <div class="col-lg-6 col-md-6 col-md-pull-6 content-item background flexbox">
+           <h2 class="section-title">景色很美，你若在场。。。。</h2>
+           <p class="section-text">人生其实也就这样，且行且珍惜。往往有故事的人反而沉静简单。青春不是身份证上的数字，而是心境;青春不是镜中的面容，而是深沉的意志、勇敢的理想与炙热的感情。青春，是心态，是一种发自内心的美丽。</p>
+           
+       </div>
+
+   </section>
+
+   <section class="col-md-12 content" id="clients">
+       <div class="col-lg-6 col-md-6 content-item">
+           <img src="images/3.jpg" alt="Image" class="tm-image">
+       </div>
+       <div class="col-lg-6 col-md-6 content-item background flexbox">
+           <h2 class="section-title">足迹</h2>
+              <p class="section-text">人生其实也就这样，且行且珍惜。往往有故事的人反而沉静简单。青春不是身份证上的数字，而是心境;青春不是镜中的面容，而是深沉的意志、勇敢的理想与炙热的感情。青春，是心态，是一种发自内心的美丽。</p>
+           
+       </div>
+   </section>
+
+
+   <section class="col-md-12 content" id="contact">
+       <div class="col-lg-6 col-md-6 col-md-push-6 content-item">
+           <img src="images/4.jpg" alt="Image" class="tm-image">
+       </div>
+       <div class="col-lg-6 col-md-6 col-md-pull-6 content-item background flexbox">
+           <h2 class="section-title">光影</h2>
+              <p class="section-text">人生其实也就这样，且行且珍惜。往往有故事的人反而沉静简单。青春不是身份证上的数字，而是心境;青春不是镜中的面容，而是深沉的意志、勇敢的理想与炙热的感情。青春，是心态，是一种发自内心的美丽。</p>
+           
+        <!--</div> -->
+        <div id="msgSubmit" class="h3 text-center hidden">Message Submitted!</div>
+
+    </div>
+
+</section>
+
+<footer class="col-md-12 content" id="externals">
+ <div class="col-lg-6 col-md-6 last">
+   <img src="images/5.png" alt="Image" class="tm-image">
+</div>
+<div class="col-lg-6 col-md-6 background last about-text-container">
+   <h2 class="section-title">世界很美</h2>
+      <p class="section-text">人生其实也就这样，且行且珍惜。往往有故事的人反而沉静简单。青春不是身份证上的数字，而是心境;青春不是镜中的面容，而是深沉的意志、勇敢的理想与炙热的感情。青春，是心态，是一种发自内心的美丽。</p>
+                  
+</div>
+</footer>
+
+</div>
+
+<div class="text-center footer">
+	<div class="container">Copyright &copy; 2017. muzi  All rights reserved.<a target="_blank" href="index.html">木子</a></div>
+</div>
+
+<div class="player_box "  id="player"   >
+<div style="display:relative;">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=360px  height=500px src="//music.163.com/outchain/player?type=0&id=703464130&auto=1&height=430"></iframe>
+ 	<i class="fa fa-angle-double-right  fa-5x player_jt"  id="jian"></i>
+ 	<div style="clear:both"></div>
+
+</div>
+<!-- <embed src="//music.163.com/style/swf/widget.swf?sid=703464130&type=0&auto=1&width=310&height=430" width="330" height="450"  allowNetworking="all"></embed> --> 
+	
+ </div>
+    <!-- layUi  js -->
+<script src="lib/jquery/jquery-3.1.0.min.js"></script>
+
+<script src="lib/jquery/jquery-ui.min.js"></script>
+
+
+<script type="text/javascript" src="layui/layui.all.js"></script>
+<script src="https://cdn.bootcss.com/Director/1.2.8/director.min.js"></script>
+<!-- 模板渲染的js -->
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap-paginator.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/jquery/jquery.singlePageNav.min.js"></script>
+<script src="lib/requirejs/require.js"></script>
+<script src="foreground/js/require.config.js"></script>
+
+<script src="lib/wish.js"></script>
+<script>
+
+$("#jian").click(function(){
+
+$("#player").toggleClass("active");
+$(".player_jt").toggleClass("fa-angle-double-right").toggleClass("fa-angle-double-left");
+	
+})
+
+/* 
+$("#player").on("click",".fa-angle-double-left",(function(){
+	$("#player").animate({left:'-360px'});
+	$(".fa-angle-double-left").attr("class","fa  fa-angle-double-right  fa-5x");
+	$("#jian").animate({left:'0px'});
+})) */
+
+
+
+
+
+
+
+// Check scroll position and add/remove background to navbar
+function checkScrollPosition() {
+    if($(window).scrollTop() > 50) {
+      $(".fixed-header").addClass("scroll");
+  } else {        
+      $(".fixed-header").removeClass("scroll");
+  }
+}
+
+$(document).ready(function () {   
+    // Single page nav
+  /*   $('.fixed-header').singlePageNav({
+        offset: 59,
+        filter: ':not(.external)',
+        updateHash: true        
+    }); */
+
+    checkScrollPosition();
+
+    // nav bar
+    $('.navbar-toggle').click(function(){
+        $('.main-menu').toggleClass('show');
+    });
+
+    $('.main-menu a').click(function(){
+        $('.main-menu').removeClass('show');
+    });
+});
+
+$(window).on("scroll", function() {
+    checkScrollPosition();    
+});
+</script>
+<script>
+		var main = $("#main");
+		var pages = function(action, req) {
+			require([ action ], function(data) {
+				data(req);
+			})
+		};
+		
+		//layUi初始化
+		!function() {
+			//当使用了 layui.all.js，无需再执行layui.use()方法
+			var from = layui.form(),
+				layer = layui.layer;
+		//…
+		}();
+</script>
+	<script src="foreground/js/router.js"></script>
+	
+	
+</body>
+</html>

@@ -1,0 +1,182 @@
+
+<section class="content-header"  id=""></section>
+
+<section class="col-md-12 content  " id="home"></section>
+<div id="article">
+
+
+</div>
+<!-- <section class="col-md-12 content  " id="services">
+	<div class="col-lg-6 col-md-6  content-item">
+		<img src="images/2.jpg" alt="Image" class="tm-image">
+	</div>
+	<div class="col-lg-6 col-md-6     content-item  background flexbox">
+		<h2 class="section-title">景色很美，你若在场。。。。</h2>
+		<p class="section-text">Morbi auctor tristique mattis. Vestibulum
+			vitae sapien a ligula mollis ullamcorper ac a nisi. Ut a dignissim
+			est, sodales pellentesque purus. Pellentesque porttitor ante at nulla
+			ornare, eget sagittis sapien pulvinar. In semper mi ut enim mollis,
+			ut auctor lectus posuere.</p>
+
+		<p>Nulla odio nunc, rhoncus quis porttitor quis, convallis sed
+			tortor. Quisque dui mews, euismod vel sapien at, maximus feugiat
+			tellus.</p>
+		<p>Curabitur vel rutrum augue, id tristique diam. Sed imperdiet
+			quis ipsum a vulputate. Suspendisse sit amet nibh mi.</p>
+	</div>
+</section>
+
+<section class="col-md-12 content padding" id="services">
+	<div class="col-lg-6 col-md-6 col-md-push-6 content-item">
+		<img src="images/2.jpg" alt="Image" class="tm-image">
+	</div>
+	<div
+		class="col-lg-6 col-md-6 col-md-pull-6 content-item background flexbox">
+		<h2 class="section-title">景色很美，你若在场。。。。</h2>
+		<p class="section-text">Morbi auctor tristique mattis. Vestibulum
+			vitae sapien a ligula mollis ullamcorper ac a nisi. Ut a dignissim
+			est, sodales pellentesque purus. Pellentesque porttitor ante at nulla
+			ornare, eget sagittis sapien pulvinar. In semper mi ut enim mollis,
+			ut auctor lectus posuere.</p>
+
+		<p>Nulla odio nunc, rhoncus quis porttitor quis, convallis sed
+			tortor. Quisque dui mews, euismod vel sapien at, maximus feugiat
+			tellus.</p>
+		<p>Curabitur vel rutrum augue, id tristique diam. Sed imperdiet
+			quis ipsum a vulputate. Suspendisse sit amet nibh mi.</p>
+	</div>
+</section>
+ -->
+
+
+
+<section class="col-md-12 content  " >
+	<div style="margin:0 auto;padding-bottom: 10px;text-align:center">
+						<span style="font-size:14px;">
+							<ul class="pagination"  id="pageUl"></ul>
+						</span>
+	</div>
+</section>
+
+<section>
+	<script type="text/templates"  id="article-t">
+		<% for(var i in list) {%>
+			<%if(i%2==0){%>
+			<section class="col-md-12 content " id=<%=list[i].aid%> >
+       			<div class="col-lg-6 col-md-6  content-item">
+           			<img src="images/2.jpg" alt="Image" class="tm-image">
+       			</div>
+       			<div class="col-lg-6 col-md-6     content-item  background flexbox">
+          	 		<h2 class="section-title"><a data-id=<%=list[i].aid%>><%=list[i].title%></a></h2>
+           			<a data-id=<%=list[i].aid%>> 
+							<%=(function(){
+								var test=list[i].content;
+								test = test.replace(/(\n)/g, "");  
+    							test = test.replace(/(\t)/g, "");  
+   								test = test.replace(/(\r)/g, "");  
+   								test = test.replace(/<\/?[^>]*>/g, "");  
+    							test = test.replace(/\s*/g, "");  
+								res=wordLimit(test,180);
+								return res;
+							}())
+							%>
+					</a>
+       			</div>
+			</section>
+			<%}else{%>
+			<section class="col-md-12 content "  id=<%=list[i].aid%>>
+        		<div class="col-lg-6 col-md-6 col-md-push-6 content-item">
+           			<img src="images/2.jpg" alt="Image" class="tm-image">
+       			</div>
+       			<div class="col-lg-6 col-md-6 col-md-pull-6 content-item background flexbox">
+           			<h2 class="section-title"><a data-id=<%=list[i].aid%>><%=list[i].title%></a></h2>
+           			<a data-id=<%=list[i].aid%>> 
+							<%=(function(){
+								var test=list[i].content;
+								test = test.replace(/(\n)/g, "");  
+    							test = test.replace(/(\t)/g, "");  
+   								test = test.replace(/(\r)/g, "");  
+   								test = test.replace(/<\/?[^>]*>/g, "");  
+    							test = test.replace(/\s*/g, "");  
+								res=wordLimit(test,180);
+								return res;
+							}())
+							%>
+							
+					</a>
+       			</div>
+			</section>
+		<%} }%>
+		
+
+	</script>
+	
+	
+
+	<script type="text/javascript">
+/* 	<%=wordLimit((list[i].content).replace(/<\/?p[^>]*>/gi,''),180) %> */
+		var page = 1;
+		function findAll() {
+			$.ajax({
+				type : "post",
+				url : "article_findAll",
+				data : {
+					"currPage" : page,
+				},
+				success : function(res) {
+					$("#article").html(_.template($("#article-t").html())({
+						list : res.list.list,
+					}));
+					var pages = res.list.totalPage; //数据总量
+					var currPage = res.list.currPage; //当前页
+					if (pages !== 0) {
+						var element = $('#pageUl'); //对应下面ul的ID
+						var options = {
+							bootstrapMajorVersion : 3,
+							currentPage : currPage, //当前页面
+							numberOfPages : 5, //一页显示10个按钮（在ul里面生成10个li）
+							totalPages : pages //总页数
+						}
+						element.bootstrapPaginator(options);
+					}
+				},
+			});
+		}
+	
+	
+		//获取当前页
+		function paging(pageNow) {
+			page = pageNow;
+			findAll();
+		}
+		//自执行查询所有文章
+		$(function() {
+			findAll();
+		})
+	
+		//页面跳转及传输文章id
+	 	$("#article").on("click", "a", function() {
+			var aid = $(this).attr('data-id');
+			window.location.href = "index.html#articleDet/" + aid;
+		}); 
+		
+		//获取指定字数文本后加。。。
+	    function wordLimit(word,len){
+	        var words=null;
+	        if(word.length>80){
+	            words=word.substring(0,len)+"...";
+	            return words;
+	        }else{
+	            words=word;
+	            return words;
+	        }
+	    }
+		
+		
+	</script>
+
+
+</section>
+
+
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+    
+    <hibernate-mapping>
+    			<class name="com.Lee.domain.ArticleDisc" table="articleDisc">
+    				<id name="adid" column="adid">
+    						<generator class="native"/>
+    				</id>
+    				<property name="content" column="content"  type="text"></property>
+    				<property name="oname"  column="oname"  length="100"></property>
+    				<property name="toId" column="toId"  length="20"></property>
+    				<property name="toname"  column="toname"  length="100"></property>
+    				<property name="uptime" column="uptime" ></property>
+    				<property name="sid" column="sid"  length="20" ></property>
+    				<!-- 关联关系映射 -->
+    				<many-to-one name="article"  class="com.Lee.domain.Article"  column="anumb"  lazy = "proxy"></many-to-one>
+    			</class>
+    </hibernate-mapping>

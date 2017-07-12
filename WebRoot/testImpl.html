@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>testImpl.html</title>
+<meta charset="utf-8">
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script src="lib/jquery/jquery-3.1.0.min.js"></script>
+</head>
+
+<body>
+	<div>
+		<button class="test" type="button " onclick="add()">添加时光轴</button>
+	</div>
+	<div>
+		<button class="test" type="button " onclick="del()">测试删除时光轴</button>
+	</div>
+	<div>
+		<button class="test" type="button " onclick="findAll()">测试分页查看时光轴</button>
+	</div>
+	<div>
+		<button class="test" type="button " onclick="find()">测试查看所有时光轴</button>
+	</div>
+	<hr>
+	<hr>
+	<div>
+		<button class="test" type="button " onclick="padd()">添加歌单</button>
+	</div>
+	<div>
+		<button class="test" type="button " onclick="pdel()">测试删除歌单</button>
+	</div>
+	<div>
+		<button class="test" type="button " onclick="pfindAll()">测试查看歌单</button>
+	</div>
+	<hr>
+	<hr>
+	<div>
+		<button class="test" type="button " onclick="madd()">添加留言</button>
+	</div>
+	<div>
+		<button class="test" type="button " onclick="mdel()">测试删除留言</button>
+	</div>
+	<div>
+		<button class="test" type="button " onclick="mfindAll()">测试分页查看留言</button>
+	</div>
+	<hr>
+	<hr>
+		<div>
+		<button class="test" type="button " onclick="adadd()">添加文章评论</button>
+	</div>
+	<div>
+		<button class="test" type="button " onclick="addel()">测试删除文章评论</button>
+	</div>
+<!-- 	<div>
+		<button class="test" type="button " onclick="adfindAll()">测试分页查看留言</button>
+	</div> -->
+	<hr>
+	<hr>
+
+
+
+</body>
+
+
+<script type="text/javascript">
+
+	function add() {
+		var mydate = new Date();
+		var t = mydate.toLocaleString();
+		console.log(t);
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "timeline_add",
+			data : {
+				"content" : "ceshi内容",
+				"uptime" : t,
+			},
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+
+
+
+	function del() {
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "timeline_delete",
+			data : {
+				"tid" : "3",
+			},
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+
+	function findAll() {
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "timeline_findAll",
+			data : {
+				"currPage" : "1",
+			},
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+	
+	
+		function find() {
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "timeline_find",
+			
+			success : function(res) {
+				
+				console.log();
+			}
+		})
+	}
+
+
+
+
+	function padd() {
+		var mydate = new Date();
+		var t = mydate.toLocaleString();
+		console.log(t);
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "playlist_add",
+			data : {
+				"pname" : "测试歌单名",
+				"pdesc" : "歌单描述",
+				"uptime" : t,
+			},
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+
+
+
+
+	function pdel() {
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "playlist_delete",
+			data : {
+				"pid" : "1",
+			},
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+
+
+
+
+
+	function pfindAll() {
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "playlist_findAll",
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+
+
+
+
+
+
+
+
+	function madd() {
+		var mydate = new Date();
+		var t = mydate.toLocaleString();
+		console.log(t);
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "msg_add",
+			data : {
+				"content" : "ceshi内容",
+				"name" : "张三",
+				"uptime" : t,
+			},
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+
+
+
+	function mdel() {
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "msg_delete",
+			data : {
+				"mid" : "3",
+			},
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+
+	function mfindAll() {
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "msg_findAll",
+			data : {
+				"currPage" : "2",
+			},
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		function adadd() {
+		var mydate = new Date();
+		var t = mydate.toLocaleString();
+		console.log(t);
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "artDisc_add",
+			data : {
+				"toId":"5",
+				"content" : "ceshi内容",
+				"oname" : "张三",
+				"uptime" : t,
+				"anumb":"5"
+			},
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+
+
+
+	function addel() {
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			url : "artDisc_delete",
+			data : {
+				"adid" : "3",
+			},
+			success : function(res) {
+				console.log();
+			}
+		})
+	}
+	
+	
+	
+	
+</script>
+
+<script type="text/javascript" src="//api.miyay.cn/Qf_Player/js/jquery.min.js"></script>
+<script language="javascript" src="//api.miyay.cn/wyplayer/music.js?id=专辑id&name=播放器名"></script>
+</html>

@@ -1,0 +1,108 @@
+<section class="content-header">
+	<h1>
+		所有愿望
+		<!-- <small>Optional description</small> -->
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> 许愿墙管理</a></li>
+		<li class="active">管理愿望</li>
+	</ol>
+</section>
+
+<section class="content" id="contentPage" v-loading="loading"
+	element-loading-text="拼命加载中">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!-- <div class="box-header">
+					<h3 class="box-title">文章集合</h3>
+				</div> -->
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="example1" class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>内容</th>
+								<th>网名</th>
+								<th>时间</th>
+								<!-- <th>2级网名</th> -->
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="msg">
+							<tr>
+								<td>内容说说</td>
+								<td>假如爱有天意</td>
+								<td>2017-04-13</td>
+								<td>你猜</td>
+								<td>删除</td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- //分页-->
+					<div style="margin:0 auto;padding-bottom: 10px;text-align:center">
+						<span style="font-size:14px;">
+							<ul class="pagination" id="pageUl"></ul>
+						</span>
+					</div>
+					<div class="c"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section>
+
+	<script type="text/templates" id="msg-t">
+		<% for(var i in list){ %>
+				<tr>
+								<td><%=list[i].content%></td>
+								<td><%=list[i].name%></td>
+								<td><%=list[i].uptime%></td>
+								<td><a href="javascript:void(0);"  data-id=<%=list[i].mid%>  >删除</></td>
+				</tr>
+		<% } %>
+	</script>
+	<script type="text/javascript">
+	
+		var page = 1;
+		function findAll() {
+			$.ajax({
+				type : "post",
+				url : "msg_findAll",
+				data : {
+					"currPage" : page,
+				},
+				success : function(res) {
+					$("#msg").html(_.template($("#msg-t").html())({
+						list : res.list.list,
+					}));
+					var pages = res.list.totalPage; //数据总量
+					var currPage = res.list.currPage; //当前页
+					if (pages !== 0) {
+						var element = $('#pageUl'); //对应下面ul的ID
+						var options = {
+							bootstrapMajorVersion : 3,
+							currentPage : currPage, //当前页面
+							numberOfPages : 5, //一页显示10个按钮（在ul里面生成10个li）
+							totalPages : pages //总页数
+						}
+						element.bootstrapPaginator(options);
+					}
+				},
+			});
+		}
+	
+		//获取当前页
+		function paging(pageNow) {
+			page = pageNow;
+			findAll();
+		}
+		//自执行查询所有说说
+		$(function() {
+			findAll();
+		})
+	</script>
+</section>
